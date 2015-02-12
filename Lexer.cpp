@@ -12,19 +12,6 @@ Lexer::Lexer() {
 
 	last = ' ';
 	index = 0;
-
-	// helping stuff
-	/*
-	for(int i = 0; i < size; i++) {
-		if(input[i] == '\n') {
-			cout << " newline" << endl;
-		} else if(input[i] == ' ') {
-			cout << " space ";
-		} else {
-			cout << input[i];
-		}
-	}
-	*/
 }
 
 Token Lexer::nextToken() {

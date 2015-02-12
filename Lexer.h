@@ -8,5 +8,9 @@ public:
 	Lexer();
 	Token nextToken();
 private:
+	string input;
+	int index;
 	char lastChar;
+	bool stopScanning(char nextChar);
+	bool isValid(char nextChar);
 };

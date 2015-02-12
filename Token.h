@@ -7,6 +7,7 @@ enum TokenCode {ID, ASSIGN, SEMICOL, INT, PLUS, MINUS, MULT, LPAREN, RPAREN, PRI
 
 class Token {
 public:
+	Token() { };
 	Token(string lexeme, TokenCode tCode) : lexeme(lexeme), tCode(tCode) { };
 private:
 	string lexeme;

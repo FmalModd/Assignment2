@@ -9,6 +9,8 @@ class Token {
 public:
 	Token() { };
 	Token(string lexeme, TokenCode tCode) : lexeme(lexeme), tCode(tCode) { };
+	string getLexeme() { return lexeme; };
+	TokenCode getToken() { return tCode; };
 private:
 	string lexeme;
 	TokenCode tCode;

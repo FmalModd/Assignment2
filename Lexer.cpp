@@ -32,7 +32,7 @@ Token Lexer::nextToken() {
 	if(valid(last)) {
 		lexeme += last;
 		TokenCode token = getToken(lexeme);
-		cout << "Token1: " << lexeme << endl;
+		//cout << "Token1: " << lexeme << endl;
 		last = ' ';
 		return Token(lexeme, token);
 	}
@@ -44,7 +44,7 @@ Token Lexer::nextToken() {
 
 	if(lexeme != "") {
 		TokenCode token = getToken(lexeme);
-		cout << "Token2: " << lexeme << endl;
+		//cout << "Token2: " << lexeme << endl;
 		return Token(lexeme, token);
 	}
 	

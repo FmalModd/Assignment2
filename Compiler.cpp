@@ -6,7 +6,7 @@ int main() {
 	Lexer myLexer;
 	//Parser myParser = Parser(myLexer); 
 	//myParser.parse();
-	for(int i = 0; i < 10; i++) {
+	for(int i = 0; i < 22; i++) {
 		cout << "i: " << i << endl;
 		myLexer.nextToken();
 	}

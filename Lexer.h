@@ -1,5 +1,6 @@
 #define LEXER_H
 #include "Token.h"
+#include <vector>
 
 using namespace std;
 
@@ -8,7 +9,10 @@ public:
 	Lexer();
 	Token nextToken();
 private:
-	string input;
+	vector<char> input;
 	int index;
 	char last;
+	bool valid(char c);
+	bool stop(char c);
+	TokenCode getToken(string lexeme);
 };

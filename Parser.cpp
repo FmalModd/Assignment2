@@ -4,10 +4,7 @@
 
 Parser::Parser() { }
 
-Parser::Parser(Lexer lexer) : lexer(lexer) { }
-
-Token nextToken;
-bool assign = false;
+Parser::Parser(Lexer lexer) : lexer(lexer), nextToken(Token()), assign(false) { }
 
 void Parser::parse() {
 	nextToken = lexer.nextToken();

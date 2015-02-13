@@ -16,7 +16,7 @@ Lexer::Lexer() {
 
 Token Lexer::nextToken() {
 	string lexeme = "";
-	if(valid(last)) {
+	if(!isspace(last)) {
 		lexeme += last;
 		TokenCode token = getToken(lexeme);
 		last = ' ';
@@ -27,13 +27,8 @@ Token Lexer::nextToken() {
 		index++;
 	}
 
-	if(isalpha(input[index])) {
-		while(isalpha(input[index])) {
-			lexeme += input[index];
-			index++;
-		}
-	} else if(isdigit(input[index])) {
-		while(isdigit(input[index])) {
+	if(isalpha(input[index]) || (isdigit(input[index]))) {
+		while((isalpha(input[index]) || (isdigit(input[index]))) && (index < input.size())) {
 			lexeme += input[index];
 			index++;
 		}
@@ -48,16 +43,6 @@ Token Lexer::nextToken() {
 	index++;
 
 	return nextToken();
-}
-
-bool Lexer::valid(char c) {
-	if((c == '+') || (c == '-') || (c == '*') ||
-		(c == ';') || (c == '(') || (c == ')') ||
-		(c == ')') || (c == '=')) {
-		return true;
-	} else {
-		return false;
-	}
 }
 
 TokenCode Lexer::getToken(string lexeme) {

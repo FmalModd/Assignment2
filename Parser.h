@@ -10,8 +10,8 @@ public:
 	void parse();
 private:
 	Lexer lexer;
-	//Token nextToken;
-	//bool assign;
+	Token nextToken;
+	bool assign;
 	void statements();
 	void statement();
 	void expr();

@@ -1,13 +1,13 @@
 #include "Parser.h"
 #include <iostream>
+#include <stdlib.h>
 
 Parser::Parser() { }
 
 Parser::Parser(Lexer lexer) : lexer(lexer) { }
 
-// enum TokenCode {ID, ASSIGN, SEMICOL, INT, PLUS, MINUS, MULT, LPAREN, RPAREN, PRINT, END, ERROR};
-
 Token nextToken;
+bool assign = false;
 
 void Parser::parse() {
 	nextToken = lexer.nextToken();
@@ -20,6 +20,10 @@ void Parser::statements() {
 	} else {
 		statement();
 		if(nextToken.getToken() == SEMICOL) {
+			if(assign) {
+				cout << "ASSIGN" << endl;
+				assign = false;
+			}
 			nextToken = lexer.nextToken();
 			statements();
 		} else {
@@ -35,7 +39,8 @@ void Parser::statement() {
 		if(nextToken.getToken() == ASSIGN) {
 			nextToken = lexer.nextToken();
 			expr();
-			cout << "ASSIGN" << endl;
+			assign = true;
+			//cout << "ASSIGN" << endl;
 		} else {
 			error();
 		}
@@ -47,6 +52,7 @@ void Parser::statement() {
 		} else {
 			error();
 		}
+		
 		cout << "PRINT" << endl;
 	} else {
 		error();

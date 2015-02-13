@@ -10,6 +10,10 @@ public:
 	void parse();
 private:
 	Lexer lexer;
-	void error();
+	void statements();
+	void statement();
 	void expr();
+	void term();
+	void factor();
+	void error();
 };

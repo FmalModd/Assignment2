@@ -38,7 +38,7 @@ Token Lexer::nextToken() {
 	last = input[index];
 	index++;
 
-	return Token();
+	return nextToken();
 }
 
 bool Lexer::valid(char c) {

@@ -8,6 +8,11 @@ Parser::Parser(Lexer lexer) : lexer(lexer) { }
 // enum TokenCode {ID, ASSIGN, SEMICOL, INT, PLUS, MINUS, MULT, LPAREN, RPAREN, PRINT, END, ERROR};
 
 void Parser::parse() {
+
+
+
+
+	/*
 	Token nextToken = lexer.nextToken();
 	if(nextToken.getToken() == LPAREN) {
 		nextToken = lexer.nextToken();
@@ -29,12 +34,31 @@ void Parser::parse() {
 			return;
 		}
 	}
+	*/
+}
+
+void Parser::statements() {
+
+}
+
+void Parser::statement() {
+
 }
 
 void Parser::expr() {
 
 }
 
+void Parser::term() {
+
+}
+
+void Parser::factor() {
+
+}
+
 void Parser::error() {
 	cout << "Syntax error!" << endl;
 }
+
+

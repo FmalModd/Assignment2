@@ -10,18 +10,34 @@ int main(){
 	map<string, int> myMap;
 	string s;
 
-	//for(int i = 0; scanf("%s", &s) != EOF; i++) {
 	while(cin >> s) {
+		cout << "inside while" << endl;
 		if (s == "PUSH") {
+			cout << "push" << endl;
 			cin >> s;
 			myIDs.push(s);
 		} else if (s == "ASSIGN") {
-			int number = stoi(myIDs.top());
+			// second = first;
+			cout << "assign" << endl;
+			string first, second;
+			int number;
+			first = myIDs.top();
 			myIDs.pop();
-			string var = myIDs.top();
+			second = myIDs.top();
 			myIDs.pop();
-			myMap.insert(pair<string, int>(var, number));
+
+			if(isdigit(first[0])) {
+				number = stoi(first);
+			} else {
+				number = myMap.find(first)->second;
+			}
+			myMap.insert(pair<string, int>(second, number));
 		} else if (s == "SUB") {
+			/*
+
+
+
+
 			string first = myIDs.top();
 			myIDs.pop();
 			string second = myIDs.top();
@@ -40,12 +56,14 @@ int main(){
 			int result = secondnumber - firstnumber;
 			string myString = to_string(result);
 			myIDs.push(myString);
+			*/
 		} else if (s == "PLUS") {
 			
 		} else if (s == "MULT") {
 			
 		} else if (s == "PRINT") {
-			cout << myIDs.top() << endl;
+			cout << "print" << endl;
+			cout << myMap.find(myIDs.top())->second << endl;
 			myIDs.pop();
 		}
 	}

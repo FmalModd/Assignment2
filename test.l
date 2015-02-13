@@ -1,0 +1,3 @@
+PUSH var
+PUSH 3
+ASSIGN

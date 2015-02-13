@@ -37,7 +37,6 @@ void Parser::statement() {
 			nextToken = lexer.nextToken();
 			expr();
 			assign = true;
-			//cout << "ASSIGN" << endl;
 		} else {
 			error();
 		}

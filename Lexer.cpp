@@ -15,23 +15,32 @@ Lexer::Lexer() {
 }
 
 Token Lexer::nextToken() {
-	string lexeme;
+	string lexeme = "";
 	if(valid(last)) {
 		lexeme += last;
 		TokenCode token = getToken(lexeme);
-		//cout << "Token1: " << lexeme << endl;
 		last = ' ';
 		return Token(lexeme, token);
 	}
 
-	while(!stop(input[index])) {
-		lexeme += input[index];
+	while(isspace(input[index])) {
 		index++;
+	}
+
+	if(isalpha(input[index])) {
+		while(isalpha(input[index])) {
+			lexeme += input[index];
+			index++;
+		}
+	} else if(isdigit(input[index])) {
+		while(isdigit(input[index])) {
+			lexeme += input[index];
+			index++;
+		}
 	}
 
 	if(lexeme != "") {
 		TokenCode token = getToken(lexeme);
-		//cout << "Token2: " << lexeme << endl;
 		return Token(lexeme, token);
 	}
 	
@@ -44,17 +53,7 @@ Token Lexer::nextToken() {
 bool Lexer::valid(char c) {
 	if((c == '+') || (c == '-') || (c == '*') ||
 		(c == ';') || (c == '(') || (c == ')') ||
-		(c == ')')) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-bool Lexer::stop(char c) {
-	if((c == '+') || (c == '-') || (c == '*') ||
-		(c == ';') || (c == '(') || (c == ')') ||
-		(c == ')') || (c == '\n') || (c == ' ')) {
+		(c == ')') || (c == '=')) {
 		return true;
 	} else {
 		return false;

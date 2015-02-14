@@ -15,6 +15,8 @@ void Parser::statements() {
 	if(nextToken.getToken() == END) {
 		return;
 	} else {
+		//If statements was not end, then it must be
+		//"statement ; statements" which we cover here
 		statement();
 		if(nextToken.getToken() == SEMICOL) {
 			if(assign) {
@@ -24,12 +26,15 @@ void Parser::statements() {
 			nextToken = lexer.nextToken();
 			statements();
 		} else {
+			//If this wasn't fulfilled we have encountered an error
 			error();
 		}
 	}
 }
 
 void Parser::statement() {
+	//statement can either be "id = expr" or "print id"
+	//we cover "id = expr" here...
 	if(nextToken.getToken() == ID) {
 		cout << "PUSH " << nextToken.getLexeme() << endl;
 		nextToken = lexer.nextToken();
@@ -40,7 +45,9 @@ void Parser::statement() {
 		} else {
 			error();
 		}
-	} else if(nextToken.getToken() == PRINT) {
+	}
+	//...and "print id" here
+	else if(nextToken.getToken() == PRINT) {
 		nextToken = lexer.nextToken();
 		if(nextToken.getToken() == ID) {
 			cout << "PUSH " << nextToken.getLexeme() << endl;
@@ -48,20 +55,24 @@ void Parser::statement() {
 		} else {
 			error();
 		}
-		
 		cout << "PRINT" << endl;
 	} else {
+		//If this wasn't fulfilled we have encountered an error
 		error();
 	}
 }
 
 void Parser::expr() {
+	//expr can only be "term",...
 	term();
+	//... "term + expr"...
 	if(nextToken.getToken() == PLUS) {
 		nextToken = lexer.nextToken();
 		expr();
 		cout << "ADD" << endl;
-	} else if(nextToken.getToken() == MINUS) {
+	} 
+	//... or "term - expr"
+	else if(nextToken.getToken() == MINUS) {
 		nextToken = lexer.nextToken();
 		expr();
 		cout << "SUB" << endl;
@@ -69,7 +80,9 @@ void Parser::expr() {
 }
 
 void Parser::term() {
+	//term may only be "factor"...
 	factor();
+	//... or "factor * term"
 	if(nextToken.getToken() == MULT) {
 		nextToken = lexer.nextToken();
 		term();
@@ -78,21 +91,31 @@ void Parser::term() {
 }
 
 void Parser::factor() {
+	//factor can only be "int",...
 	if(nextToken.getToken() == INT) {
 		cout << "PUSH " << nextToken.getLexeme() << endl;
 		nextToken = lexer.nextToken();
-	} else if(nextToken.getToken() == ID) {
+	} 
+	//..."id"...
+	else if(
+		nextToken.getToken() == ID) {
 		cout << "PUSH " << nextToken.getLexeme() << endl;
 		nextToken = lexer.nextToken();
-	} else if(nextToken.getToken() == LPAREN) {
+	} 
+	//...or "(expr)"
+	else if(nextToken.getToken() == LPAREN) {
 		nextToken = lexer.nextToken();
 		expr();
 		if(nextToken.getToken() == RPAREN) {
 			nextToken = lexer.nextToken();
-		} else {
+		} 
+		//error if we read left paren, expr, but not a right paren
+		else {
 			error();
 		}
-	} else {
+	} 
+	//If this wasn't fulfilled we have encountered an error
+	else {
 		error();
 	}
 }

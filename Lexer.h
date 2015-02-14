@@ -10,8 +10,8 @@ public:
 	Token nextToken();
 private:
 	vector<char> input;
-	int index;
-	char last;
+	int index; //position in string
+	char last; //the last character we took from the input string
 	bool valid(char c);
 	bool stop(char c);
 	TokenCode getToken(string lexeme);

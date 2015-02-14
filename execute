@@ -1,0 +1,5 @@
+#!/bin/bash
+
+g++ Compiler.cpp Parser.cpp Lexer.cpp -o Compiler
+g++ Interpreter.cpp -o Interpreter
+./Compiler < $1 | ./Interpreter
